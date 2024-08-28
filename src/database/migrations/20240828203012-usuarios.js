@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable("alunos", {
+    return queryInterface.createTable("usuarios", {
       id: {
         type: Sequelize.INTEGER,
         alowNull: false,
@@ -14,24 +14,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      sobrenome: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
-      idade: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      peso: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      altura: {
-        type: Sequelize.FLOAT,
+      password_hash: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       created_at: {
@@ -46,6 +35,6 @@ module.exports = {
   },
 
   down(queryInterface) {
-    return queryInterface.dropTable("alunos");
+    return queryInterface.dropTable("usuarios");
   },
 };
