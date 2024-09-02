@@ -2,17 +2,12 @@ import Aluno from "../models/Aluno";
 
 class HomeController {
   async index(req, res) {
-    const novoAluno = await Aluno.create({
-      nome: "Joao",
-      sobrenome: "Burger",
-      email: "joaoburger@hotmail.com",
-      idade: 18,
-      peso: 85.6,
-      altura: 1.72,
-    });
-    res.status(200).json({
-      dado: novoAluno,
-    });
+    try {
+      const alunos = await Aluno.findAll();
+      res.status(200).json(alunos);
+    } catch (e) {
+      res.status(400).json({ errors: e.errors.map((erro) => erro.message) });
+    }
   }
 }
 
