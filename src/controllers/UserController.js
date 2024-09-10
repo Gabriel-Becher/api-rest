@@ -8,7 +8,7 @@ class UserController {
         email: req.body.email,
         password: String(req.body.password),
       });
-      res.status(200).json({
+      return res.status(200).json({
         message: "Usuário cadastrado com sucesso",
         Usuario: novoUsuario,
       });
@@ -19,7 +19,9 @@ class UserController {
 
   async index(req, res) {
     try {
-      const usuarios = await Usuario.findAll();
+      const usuarios = await Usuario.findAll({
+        attributes: ["id", "nome", "email"],
+      });
       res.status(200).json(usuarios);
     } catch (e) {
       res.status(400).json({ errors: e.errors.map((erro) => erro.message) });
@@ -29,30 +31,37 @@ class UserController {
   async show(req, res) {
     try {
       const usuario = await Usuario.findByPk(req.params.id);
-      res.status(200).json(usuario);
+      if (!usuario) {
+        return res.status(400).json({ error: "Usuário não encontrado" });
+      }
+      console.log(usuario);
+      const { id, nome, email } = usuario;
+      res.status(200).json({ id, nome, email });
     } catch (e) {
+      console.log(e);
       res.status(400).json({ errors: e.errors.map((erro) => erro.message) });
     }
   }
 
   async update(req, res) {
     try {
-      const usuario = await Usuario.findByPk(req.params.id);
+      const usuario = await Usuario.findByPk(req.userId);
       if (!usuario) {
         return res.status(400).json({
           errors: ["Usuário não encontrado"],
         });
       }
       const novoUsuario = await usuario.update(req.body);
-      res.status(200).json(novoUsuario);
+      const { id, nome, email } = novoUsuario;
+      res.status(200).json({ id, nome, email });
     } catch (e) {
-      res.status(400).json({ errors: e.errors.map((erro) => erro.message) });
+      res.status(400).json({ erro: e });
     }
   }
 
   async delete(req, res) {
     try {
-      const usuario = await Usuario.findByPk(req.params.id);
+      const usuario = await Usuario.findByPk(req.userId);
       if (!usuario) {
         return res.status(400).json({
           errors: ["Usuário não encontrado"],
