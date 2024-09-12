@@ -14,7 +14,12 @@ class AlunoController {
           "peso",
           "altura",
         ],
-        order: [["created_at", "DESC"]],
+        include: {
+          model: Foto,
+          attributes: ["url", "filename"],
+          order: [["id", "DESC"]],
+        },
+        order: [["id", "DESC"]],
       });
       res.status(200).json(alunos);
     } catch (e) {

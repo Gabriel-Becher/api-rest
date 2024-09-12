@@ -14,10 +14,15 @@ export default {
   },
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, resolve(__dirname, "..", "..", "uploads"));
+      cb(null, resolve(__dirname, "..", "..", "uploads", "images"));
     },
     filename: (req, file, cb) => {
-      cb(null, `${Date.now()}User${req.userId}${extname(file.originalname)}`);
+      cb(
+        null,
+        `${Date.now()}${"Aluno" + req.body.aluno_id}${extname(
+          file.originalname
+        )}`
+      );
     },
   }),
 };
