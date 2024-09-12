@@ -11,6 +11,8 @@ import tokenRoutes from "./src/routes/tokenRoutes";
 
 import alunoRoutes from "./src/routes/alunoRoutes";
 
+import picRoutes from "./src/routes/PicRoutes";
+
 import "./src/database";
 
 class App {
@@ -30,6 +32,7 @@ class App {
     this.app.use("/users/", userRoutes);
     this.app.use("/tokens/", tokenRoutes);
     this.app.use("/alunos/", alunoRoutes);
+    this.app.use("/fotos/", picRoutes);
   }
 }
 
