@@ -22,12 +22,12 @@ class TokenController {
     const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
-    user = {
+    const user1 = {
       id,
       nome: user.nome,
       email,
     };
-    return res.json(token, user);
+    return res.json(token, user1);
   }
 }
 
