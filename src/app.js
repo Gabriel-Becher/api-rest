@@ -17,21 +17,7 @@ import picRoutes from "./routes/PicRoutes";
 
 import cors from "cors";
 
-import helmet from "helmet";
-
 import "./database";
-
-const whitelist = ["http://34.95.249.49", "http://localhost:3000"];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Não permitido pelo CORS"));
-    }
-  },
-};
 
 class App {
   constructor() {
@@ -41,8 +27,7 @@ class App {
   }
 
   middlewares() {
-    this.app.use(cors(corsOptions));
-    this.app.use(helmet());
+    this.app.use(cors());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
     this.app.use(express.static(resolve(__dirname, "..", "uploads")));
