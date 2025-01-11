@@ -36,12 +36,15 @@ This is a simples Restful API created to exercise the concept and learn sequeliz
 
 ## API Documentation 
 
+### Test Route
+
 #### Returns Ok
 
 ```http
   GET /
 ```
 
+### Token Route
 
 #### Returns a Bearer Token
 
@@ -53,6 +56,8 @@ This is a simples Restful API created to exercise the concept and learn sequeliz
 | :---------- | :--------- | :------------------------------------------|
 | `email`     | `string`   | **Required**. User email for validation    |
 | `senha`     | `string`   | **Required**. User password for validation |
+
+### User Routes
 
 #### Creates an User
 
@@ -95,17 +100,23 @@ This is a simples Restful API created to exercise the concept and learn sequeliz
 | `id`        | `integer`  | **Required**. User id                      |
 
 
-#### Returns all Students
+### Students Routes
+
+#### Returns all Students with theirs pictures url
 
 ```http
     GET /students/
 ```
 
-#### Returns a single Student
+#### Returns a single Student with it's picture url
 
 ```http
     GET /students/:id
 ```
+
+| URL Parameter   | Type       | Description                                |
+| :----------     | :--------- | :------------------------------------------|
+| `id`            | `integer`  | **Required**. User id                      |
 
 #### Creates a Student
 
@@ -115,6 +126,15 @@ This is a simples Restful API created to exercise the concept and learn sequeliz
 
 * **Auth Required**
 
+| Parameter       | Type       | Description                                |
+| :----------     | :--------- | :------------------------------------------|
+| `nome`          | `string`   | **Required**. Student name, 3-255 characters|
+| `sobrenome`     | `string`   | **Required**. Student surname, 3-255 charracters|
+| `email`         | `string`   | **Required**. Student valid email          |
+| `idade`         | `integer`  | **Required**. Student age, must be integer |
+| `peso`          | `float`    | **Required**. Student weight               |
+| `altura`        | `float`    | **Required**. Student heigth               |
+
 #### Updates a Student
 
 ```http
@@ -122,6 +142,20 @@ This is a simples Restful API created to exercise the concept and learn sequeliz
 ```
 
 * **Auth Required**
+
+| URL Parameter   | Type       | Description|
+| :----------     | :--------- | :----------|
+| `id`            | `integer`  | **Required**. Student Id|
+
+
+| Body Parameter  | Type       | Description                                |
+| :----------     | :--------- | :------------------------------------------|
+| `nome`          | `string`   | Student name, 3-255 characters|
+| `sobrenome`     | `string`   | Student surname, 3-255 charracters|
+| `email`         | `string`   | Student valid email          |
+| `idade`         | `integer`  | Student age, must be integer |
+| `peso`          | `float`    | Student weight               |
+| `altura`        | `float`    | Student heigth               |
 
 #### Deletes a Student
 
@@ -131,6 +165,11 @@ This is a simples Restful API created to exercise the concept and learn sequeliz
 
 * **Auth Required**
 
+| Parameter       | Type       | Description                                |
+| :----------     | :--------- | :------------------------------------------|
+| `id`            | `integer`  | **Required**. Student id                   |
+
+### Picture Route
 
 #### Uploads a Student Picture
 
