@@ -1,3 +1,4 @@
+
 # Restful-API
 
 This is a simples Restful API created to exercise the concept and learn sequelize as a tool to manage databases and data itself, alongside important features like authentication and file storage.
@@ -35,27 +36,111 @@ This is a simples Restful API created to exercise the concept and learn sequeliz
 
 ## API Documentation 
 
-#### Retorna todos os itens
+#### Returns Ok
 
 ```http
-  GET /api/items
+  GET /
 ```
 
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `api_key` | `string` | **Obrigatório**. A chave da sua API |
 
-#### Retorna um item
+#### Returns a Bearer Token
 
 ```http
-  GET /api/items/${id}
+  POST /tokens/
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `string` | **Obrigatório**. O ID do item que você quer |
+| Parameter   | Type       | Description                                |
+| :---------- | :--------- | :------------------------------------------|
+| `email`     | `string`   | **Required**. User email for validation    |
+| `senha`     | `string`   | **Required**. User password for validation |
 
-#### add(num1, num2)
+#### Creates an User
 
-Recebe dois números e retorna a sua soma.
+```http
+    POST /users/
+```
 
+* **Auth Required**
+
+| Parameter   | Type       | Description                                |
+| :---------- | :--------- | :------------------------------------------|
+| `nome`      | `string`   | **Required**. User name                    |
+| `email`     | `string`   | **Required**. User email                   |
+| `password`  | `string`   | **Required**. User password                |
+
+#### Updates an User
+
+```http
+    PUT /users/
+```
+
+* **Auth Required**
+
+| Parameter   | Type       | Description                                |
+| :---------- | :--------- | :------------------------------------------|
+| `id`        | `integer`  | **Required**. User id                      |
+| `email`     | `string`   | User's new email                           |
+| `password`  | `string`   | User's new password                        |
+
+#### Deletes an User
+
+```http
+    DELETE /users/
+```
+
+* **Auth Required**
+
+| Parameter   | Type       | Description                                |
+| :---------- | :--------- | :------------------------------------------|
+| `id`        | `integer`  | **Required**. User id                      |
+
+
+#### Returns all Students
+
+```http
+    GET /students/
+```
+
+#### Returns a single Student
+
+```http
+    GET /students/:id
+```
+
+#### Creates a Student
+
+```http
+    POST /students/
+```
+
+* **Auth Required**
+
+#### Updates a Student
+
+```http
+    PUT /students/:id
+```
+
+* **Auth Required**
+
+#### Deletes a Student
+
+```http
+    DELETE /students/:id
+```
+
+* **Auth Required**
+
+
+#### Uploads a Student Picture
+
+```http
+    POST /pictures/
+```
+
+* **Auth Required**
+
+| Parameter   | Type       | Description                                         |
+| :---------- | :--------- | :------------------------------------------         |
+| `aluno_id`  | `integer`  | **Required**. Student id                            |
+| `file`      | `file`     | **Required**. Binary data in PNG, JPEG or JPG format|
